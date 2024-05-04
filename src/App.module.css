@@ -1,0 +1,10 @@
+.Home { }
+
+.Home__CardsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-gap: 20px;
+  align-items: stretch;
+  padding-inline: 20px;
+  padding-bottom: 20px;
+}

@@ -1,0 +1,72 @@
+.JobCard {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px 0px !important;
+  border-radius: 20px;
+  padding: 20px 20px;
+}
+
+.JobCard__Header {
+
+}
+
+.JobCard__HeaderRow {
+  display: flex;
+  gap: 10px;
+}
+
+.JobCard__HeaderInfoCompanyNameText {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 3px;
+  color: #8b8b8b;
+}
+
+.JobCard__HeaderInfoRollTypeText {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.JobCard__HeaderInfoLocationText {
+  font-size: 11px;
+  font-weight: 500;
+  margin-top: 5px;
+}
+
+.JobCard__SalaryInfoEstSalaryText {
+  font-size: 14px;
+  margin: 8px 0;
+  color: rgb(77, 89, 106);
+  font-weight: 400;
+}
+
+.JobCard__CompanyInfoAboutCompanyText {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.JobCard__CompanyInfoAboutUsText {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.JobCard__CompanyInfoDescriptionText {
+  font-size: 14px;
+}
+
+.JobCard__Footer {
+  margin-top: 20px;
+}
+
+.JobCard__FooterMinExpText {
+ font-size: 13px;
+ font-weight: 600;
+ letter-spacing: 1px;
+ margin-bottom: 3px;
+ color: #8b8b8b;
+}
+
+.JobCard__FooterExpCountText {
+  font-size: 14px;
+  line-height: 1.5;
+}
