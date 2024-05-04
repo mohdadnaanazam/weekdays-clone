@@ -1,9 +1,22 @@
+import { Button } from '../Button';
 import style from './JobCard.module.css'
+
+const Tag = () => {
+  return (
+    <div className={style.Tag}>
+      <div className={style.Tag__Badge}>
+        <div className={style.Tag__Container}>
+          <p className={style.Tag__Text}>⏳ Posted 16 days ago</p>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 export const JobCard = () => {
   return (
     <article className={style.JobCard}>
-
+      <Tag />
       <header className={style.JobCard__Header}>
         <div className={style.JobCard__HeaderRow}>
           <div>
@@ -36,10 +49,16 @@ export const JobCard = () => {
         </p>
       </section>
 
+      <div className={style.JobCard__ViewJobButton}>
+        <p className={style.JobCard__ViewJobText}>View Job</p>
+      </div>
+
       <footer className={style.JobCard__Footer}>
         <h2 className={style.JobCard__FooterMinExpText}>Minimum Experience</h2>
         <p className={style.JobCard__FooterExpCountText}>2 years</p>
       </footer>
+
+      <Button />
     </article>
   );
 };

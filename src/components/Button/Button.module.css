@@ -1,0 +1,31 @@
+.Button {
+  justify-content: space-between;
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  font-family: "Lexend", sans-serif;
+}
+
+.Button__Text {
+  width: 100%;
+  background-color: rgb(85, 239, 196);
+  color: rgb(0, 0, 0);
+  font-weight: 500;
+  padding: 8px 18px;
+  border-radius: 8px;
+  margin: 5px 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  outline: 0px;
+  border: 0px;
+  cursor: pointer;
+  vertical-align: middle;
+  appearance: none;
+  text-decoration: none;
+  line-height: 1.75;
+  min-width: 64px;
+  font-size: 16px;
+}

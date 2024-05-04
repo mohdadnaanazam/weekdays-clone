@@ -2,6 +2,7 @@
   box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px 0px !important;
   border-radius: 20px;
   padding: 20px 20px;
+  font-family: "Lexend", sans-serif;
 }
 
 .JobCard__Header {
@@ -52,7 +53,27 @@
 
 .JobCard__CompanyInfoDescriptionText {
   font-size: 14px;
+  overflow: hidden;
+  mask-image: linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255), rgba(255, 255, 255, 0));
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.87)
 }
+
+.JobCard__ViewJobButton {
+  margin-bottom: 0.5rem;
+  position: relative;
+  top: -20px;
+}
+
+.JobCard__ViewJobText{
+  text-align: center;
+  color: #4943da;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+}
+
 
 .JobCard__Footer {
   margin-top: 20px;
@@ -69,4 +90,34 @@
 .JobCard__FooterExpCountText {
   font-size: 14px;
   line-height: 1.5;
+}
+
+.Tag{
+  display: flex;
+  width: 100%;
+  padding: 5px 0px;
+}
+
+.Tag__Badge{
+  display: flex;
+  align-items: flex-start;
+  padding: 5px 0;
+  flex-wrap: wrap;
+  gap: 5px;
+  width: 100%;
+  flex: 1 1 0%;
+}
+
+.Tag__Container{
+  padding: 4px 6px;
+  box-shadow: rgba(6, 6, 6, 0.05) 0px 2px 6px 0px;
+  border-radius: 10px;
+  border: 1px solid rgb(230, 230, 230);
+}
+
+.Tag__Text{
+  margin: 0px;
+  font-weight: 400;
+  line-height: 1.5;
+  font-size: 9px;
 }
