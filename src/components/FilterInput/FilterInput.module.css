@@ -1,0 +1,40 @@
+.MuiChip-root {
+  border-radius: 0;
+}
+
+.Container {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-inline: 20px;
+  /* padding-inline: 500px; */
+}
+
+.FilterAutoComplete {
+  :global(.MuiInputBase-input) {
+    font-size: 13px;
+    font-family: 'Lexend';
+    font-weight: 400;
+    height: 24px;
+    padding: 0 !important;
+  }
+
+  :global(.MuiButtonBase-root) {
+    height: 19px;
+    font-size: 10px;
+    border-radius: 5px;
+  }
+
+  :global(.MuiChip-deleteIcon) {
+    height: 14px;
+  }
+
+  :global(.MuiInputBase-root) {
+    /* padding: 6px 20px !important;
+    padding-right: 70px !important; */
+  }
+}
