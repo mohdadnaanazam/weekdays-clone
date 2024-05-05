@@ -1,5 +1,5 @@
 import React from 'react'
-import { Autocomplete, Box, TextField } from '@mui/material'
+import { Autocomplete, TextField } from '@mui/material'
 import style from './FilterInput.module.css';
 
 export const FilterInput = () => {
@@ -12,8 +12,8 @@ export const FilterInput = () => {
   })
 
   return (
-    <Box className={style.Container}>
-      <div className={style.FilterAutoComplete}>
+    <div className={style.FilterInput}>
+      <div className={style.FilterInput__AutoComplete}>
         <Autocomplete
           id="roles"
           options={options}
@@ -31,7 +31,7 @@ export const FilterInput = () => {
         />
       </div>
 
-      <div className={style.FilterAutoComplete}>
+      <div className={style.FilterInput__AutoComplete}>
         <Autocomplete
           id="employees"
           options={employees}
@@ -47,7 +47,7 @@ export const FilterInput = () => {
         />
       </div>
 
-      <div className={style.FilterAutoComplete}>
+      <div className={style.FilterInput__AutoComplete}>
         <Autocomplete
           id="experience"
           options={experience}
@@ -63,7 +63,7 @@ export const FilterInput = () => {
         />
       </div>
 
-      <div className={style.FilterAutoComplete}>
+      <div className={style.FilterInput__AutoComplete}>
         <Autocomplete
           id="remote"
           options={['Remote', 'In-Office', 'Hybrid']}
@@ -79,7 +79,7 @@ export const FilterInput = () => {
         />
       </div>
 
-      <div className={style.FilterAutoComplete}>
+      <div className={style.FilterInput__AutoComplete}>
         <Autocomplete
           id="roles"
           options={pay}
@@ -94,7 +94,7 @@ export const FilterInput = () => {
           )}
         />
       </div>
-    </Box>
+    </div>
   )
 }
 
