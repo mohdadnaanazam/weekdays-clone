@@ -1,5 +1,6 @@
-## Available Scripts
+# weekdays-clone apply job
 
+## Available Scripts
 Project can be run by following scrip
 
 ## 1
@@ -10,6 +11,3 @@ Project can be run by following scrip
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-# weekdays-clone
-# weekdays-clone
