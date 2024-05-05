@@ -93,8 +93,51 @@ export const jobDataSlice = createSlice({
       })
       .addCase(getJob.fulfilled, (state, action) => {
         const prevData = state.jobData || []
+        const hasFilters = Object.keys(state.filters)
 
         state.jobData = [...prevData, ...action.payload.jdList]
+
+        if (hasFilters) {
+          const { roles, experience, pay, jobType, companyName } = state.filters
+
+          // initialize filteredJobs with all jobs
+          let filteredJobs = state.jobData;
+
+          // apply role filter
+          if (roles?.length > 0) {
+            filteredJobs = filteredJobs.filter(job => roles.includes(job.jobRole));
+          }
+
+          // apply experience filter
+          if (experience?.length > 0) {
+            filteredJobs = filteredJobs.filter(job => job.minExp <= experience);
+          }
+
+          // apply pay filter
+          if (pay !== null && pay !== undefined) {
+            filteredJobs = filteredJobs.filter(job => job.minJdSalary <= pay);
+          }
+
+          // apply jobType filter
+          if (jobType?.length > 0) {
+            filteredJobs = filteredJobs.filter(job => {
+              if (jobType.includes('office')) {
+                return job.location !== 'remote' && job.location !== 'hybrid'
+              } else if (jobType.includes('remote')) {
+                return job.location === 'remote'
+              } else {
+                return job.location === 'hybrid'
+              }
+            })
+          }
+
+          if (companyName?.length > 0) {
+            filteredJobs = filteredJobs.filter(job => job.companyName.toLowerCase().includes(companyName))
+          }
+
+          state.jobWithFilters = filteredJobs
+        }
+
         state.totalCount = action.payload.totalCount
         state.nextPageLoading = false
         state.loading = false
