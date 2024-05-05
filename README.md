@@ -1,6 +1,8 @@
-# weekdays-clone apply job
+# weekdays-clone
+### Note:
+Number of employee filter is not being implemented as there is no such response from the api to filter the jobs
 
-## Available Scripts
+# Available Scripts
 Project can be run by following scrip
 
 ## 1

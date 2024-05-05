@@ -2,22 +2,6 @@ import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter'
 import { Button } from '../Button';
 import style from './JobCard.module.css'
 
-/**
- * @description Tag component
- * @returns JSX.Element
- */
-const Tag = () => {
-  return (
-    <div className={style.Tag}>
-      <div className={style.Tag__Badge}>
-        <div className={style.Tag__Container}>
-          <p className={style.Tag__Text}>⏳ Posted 16 days ago</p>
-        </div>
-      </div>
-    </div>
-  )
-}
-
 export const RenderMinExp = (props) => {
   const { minExp } = props
 
@@ -57,12 +41,9 @@ export const JobCard = (props) => {
 
   return (
     <article className={style.JobCard}>
-      <Tag />
       <header className={style.JobCard__Header}>
         <div className={style.JobCard__HeaderRow}>
-          <div>
-            <img style={{ height: 30, width: 30 }} src={logoUrl} alt="company-img" />
-          </div>
+          <img className={style.JobCard__HeaderRowImg} src={logoUrl} alt="company-img" />
 
           <div className={style.JobCard__HeaderInfo}>
             <h1 className={style.JobCard__HeaderInfoCompanyNameText}>{companyName}</h1>
