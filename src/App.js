@@ -1,7 +1,6 @@
 import { getJob } from './features/jobDataSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
-import InfiniteScroll from 'react-infinite-scroll-component'
 import classNames from 'classnames'
 
 import './styles/globals.css'
@@ -53,13 +52,29 @@ function App() {
     handleFetchJobs()
   }, [])
 
+  useEffect(() => {
+    function handleScroll() {
+      const scrollTop = window.innerHeight + window.scrollY;
+      const scrollHeight = document.body.scrollHeight;
+
+      if (scrollTop >= scrollHeight) {
+        handleFetchNextPage()
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [jobData.loading, nextPageLoading])
+
 
   /**
    * @description Fetches the next page of jobs
    * @returns {void}
    */
   const handleFetchNextPage = () => {
-    if (!jobData.loading) {
+    if (!jobData.loading && !nextPageLoading && jobData.jobData.length < totalCount) {
       dispatch(getJob(offset + 10))
     }
   }
@@ -68,13 +83,11 @@ function App() {
     <div className={style.Home}>
       <FilterInput />
 
-      <InfiniteScroll dataLength={jobData.jobData?.length} next={handleFetchNextPage} hasMore={jobData.jobData?.length <= totalCount}>
-        <RenderJobs jobData={jobData} isLoading={jobData.loading} />
+      <RenderJobs jobData={jobData} isLoading={jobData.loading} />
 
-        <section className={classNames(nextPageLoading && !initialLoading  ? style.Home__Footer : style['Home__Footer--Hidden'])}>
-          <Loader />
-        </section>
-      </InfiniteScroll>
+      <section className={classNames(nextPageLoading && !initialLoading ? style.Home__Footer : style['Home__Footer--Hidden'])}>
+        <Loader />
+      </section>
     </div>
   );
 }
