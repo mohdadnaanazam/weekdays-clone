@@ -71,7 +71,7 @@ function App() {
       const scrollTop = window.innerHeight + window.scrollY;
       const scrollHeight = document.body.scrollHeight;
 
-      if (scrollTop >= scrollHeight) {
+      if (scrollTop >= scrollHeight && !nextPageLoading ) {
         handleFetchNextPage()
       }
     }
