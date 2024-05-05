@@ -1,7 +1,52 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Autocomplete, TextField } from '@mui/material'
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import style from './FilterInput.module.css';
+import { jobFilter, filterJobs } from '../../features/jobDataSlice';
 
 export const FilterInput = () => {
+  // init
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const applyJobs = useSelector((state) => state.app)
+
+  // update the URL whenever filters change
+  useEffect(() => {
+    const searchParams = new URLSearchParams();
+    searchParams.append('filters', JSON.stringify(applyJobs?.filters));
+
+    navigate(`?${searchParams.toString()}`);
+  }, [applyJobs.filters, navigate])
+
+  // filter jobs whenever filters change
+  useEffect(() => {
+    if (Object.values(applyJobs.filters).length > 0) {
+      dispatch(filterJobs())
+    }
+  }, [applyJobs.filters])
+
+
+  /**
+   * @description Updates the filters
+   * @param {string} key
+   * @param {string | string[]} value
+   */
+  const handleUpdateFilters = (key, value) => {
+    const updatedFilters = {
+      ...applyJobs.filters,
+      [key]: value
+    }
+
+    if (Array.isArray(value) && value?.length === 0) {
+      delete updatedFilters[key];
+    }
+
+    dispatch(jobFilter(updatedFilters));
+  }
+
   const options = roles.map((option) => {
     const group = option.group
     return {
@@ -19,6 +64,7 @@ export const FilterInput = () => {
           groupBy={(option) => option.groupBy}
           getOptionLabel={(option) => option.title}
           multiple
+          onChange={(e, item) => handleUpdateFilters('roles', item.map((i) => i.value))}
           sx={{ minWidth: 250 }}
           renderInput={(params) => (
             <TextField
@@ -51,6 +97,7 @@ export const FilterInput = () => {
           id="experience"
           options={experience}
           sx={{ width: 150, fontSize: '18px' }}
+          onChange={(e, item) => handleUpdateFilters('experience', item)}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -83,6 +130,7 @@ export const FilterInput = () => {
           id="roles"
           options={pay}
           sx={{ width: 150 }}
+          onChange={(e, item) => handleUpdateFilters('pay', item?.value)}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -105,40 +153,40 @@ export const FilterInput = () => {
 }
 
 const roles = [
-  { title: 'Backend Developer', group: 'Development' },
-  { title: 'Product Manager', group: 'Management' },
-  { title: 'Frontend Developer', group: 'Development' },
-  { title: 'Data Scientist', group: 'Data' },
-  { title: 'UI/UX Designer', group: 'Design' },
-  { title: 'Software Engineer', group: 'Development' },
-  { title: 'Database Administrator', group: 'Data' },
-  { title: 'Project Manager', group: 'Management' },
-  { title: 'Systems Analyst', group: 'Development' },
-  { title: 'Full Stack Developer', group: 'Development' },
-  { title: 'Technical Lead', group: 'Management' },
-  { title: 'Scrum Master', group: 'Management' },
-  { title: 'Quality Assurance Engineer', group: 'Testing' },
-  { title: 'DevOps Engineer', group: 'Development' },
-  { title: 'Data Engineer', group: 'Data' },
-  { title: 'Machine Learning Engineer', group: 'Data' },
-  { title: 'Cybersecurity Analyst', group: 'Security' },
-  { title: 'Cloud Architect', group: 'Infrastructure' },
-  { title: 'Network Engineer', group: 'Infrastructure' },
-  { title: 'Business Analyst', group: 'Management' },
-  { title: 'UI Designer', group: 'Design' },
-  { title: 'Backend Engineer', group: 'Development' },
-  { title: 'Frontend Engineer', group: 'Development' },
-  { title: 'Product Owner', group: 'Management' },
-  { title: 'Software Architect', group: 'Development' },
-  { title: 'Technical Writer', group: 'Documentation' },
-  { title: 'System Administrator', group: 'Infrastructure' },
-  { title: 'UX Designer', group: 'Design' },
-  { title: 'QA Engineer', group: 'Testing' },
-  { title: 'Web Developer', group: 'Development' },
-  { title: 'IT Manager', group: 'Management' },
-  { title: 'Database Developer', group: 'Data' },
-  { title: 'Technical Consultant', group: 'Consulting' },
-  { title: 'IT Specialist', group: 'Infrastructure' },
+  { title: 'Backend Developer', group: 'Development', value: 'backend' },
+  { title: 'Product Manager', group: 'Management', value: 'product manager' },
+  { title: 'Frontend Developer', group: 'Development', value: 'frontend' },
+  { title: 'Data Scientist', group: 'Data', value: 'data scientist' },
+  { title: 'UI/UX Designer', group: 'Design', value: 'ui/ux designer' },
+  { title: 'Software Engineer', group: 'Development', value: 'software engineer' },
+  { title: 'Database Administrator', group: 'Data', value: 'database administrator' },
+  { title: 'Project Manager', group: 'Management', value: 'project manager' },
+  { title: 'Systems Analyst', group: 'Development', value: 'systems analyst' },
+  { title: 'Full Stack Developer', group: 'Development', value: 'full stack developer' },
+  { title: 'Technical Lead', group: 'Management', value: 'technical lead' },
+  { title: 'Scrum Master', group: 'Management', value: 'scrum master' },
+  { title: 'Quality Assurance Engineer', group: 'Testing', values: 'quality assurance engineer' },
+  { title: 'DevOps Engineer', group: 'Development', value: 'devops engineer' },
+  { title: 'Data Engineer', group: 'Data', value: 'data engineer' },
+  { title: 'Machine Learning Engineer', group: 'Data', value: 'machine learning engineer' },
+  { title: 'Cybersecurity Analyst', group: 'Security', value: 'cybersecurity analyst' },
+  { title: 'Cloud Architect', group: 'Infrastructure', value: 'cloud architect' },
+  { title: 'Network Engineer', group: 'Infrastructure', value: 'network engineer' },
+  { title: 'Business Analyst', group: 'Management', value: 'business analyst' },
+  { title: 'UI Designer', group: 'Design', value: 'ui designer' },
+  { title: 'Backend Engineer', group: 'Development', value: 'backend engineer' },
+  { title: 'Frontend Engineer', group: 'Development', value: 'frontend engineer' },
+  { title: 'Product Owner', group: 'Management', value: 'product owner' },
+  { title: 'Software Architect', group: 'Development', value: 'software architect' },
+  { title: 'Technical Writer', group: 'Documentation', value: 'technical writer' },
+  { title: 'System Administrator', group: 'Infrastructure', value: 'system administrator' },
+  { title: 'UX Designer', group: 'Design', value: 'ux designer' },
+  { title: 'QA Engineer', group: 'Testing', value: 'qa engineer' },
+  { title: 'Web Developer', group: 'Development', value: 'web developer' },
+  { title: 'IT Manager', group: 'Management', value: 'it manager' },
+  { title: 'Database Developer', group: 'Data', value: 'database developer' },
+  { title: 'Technical Consultant', group: 'Consulting', value: 'technical consultant' },
+  { title: 'IT Specialist', group: 'Infrastructure', value: 'it specialist' },
 ]
 
 const experience = [
@@ -153,14 +201,13 @@ const experience = [
 ]
 
 const pay = [
-  '10L',
-  '20L',
-  '30L',
-  '40L',
-  '50L',
-  '60L',
-  '70L',
-  '80L',
+  { label: '20L', value: 20 },
+  { label: '30L', value: 30 },
+  { label: '40L', value: 40 },
+  { label: '50L', value: 50 },
+  { label: '60L', value: 60 },
+  { label: '70L', value: 70 },
+  { label: '80L', value: 80 },
 ]
 
 const employees = [

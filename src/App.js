@@ -13,6 +13,8 @@ import { Loader } from './components/Loader'
 const RenderJobs = (props) => {
   const { jobData, isLoading } = props
 
+  const { filters } = jobData
+
   if (isLoading) {
     return (
       <section className={style['Home__CardsContainer--Loading']}>
@@ -21,9 +23,19 @@ const RenderJobs = (props) => {
     )
   }
 
+  if (Object.values(filters).length > 0) {
+    return (
+      <section className={style.Home__CardsContainer}>
+        {jobData?.jobWithFilters?.map((job, index) => (
+          <JobCard key={job.jdUid} job={job} />
+        ))}
+      </section>
+    )
+  }
+
   return (
     <section className={style.Home__CardsContainer}>
-      {jobData?.jobData?.map((job, index) => (
+      {jobData?.jobData?.map((job) => (
         <JobCard key={job.jdUid} job={job} />
       ))}
     </section>
@@ -38,6 +50,8 @@ function App() {
   const totalCount = jobData.totalCount
   const nextPageLoading = jobData.nextPageLoading
   const initialLoading = jobData.loading
+
+  console.log(jobData, 'jobData')
 
   /**
    * @description Fetches jobs from the API
