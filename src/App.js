@@ -23,7 +23,7 @@ const RenderJobs = (props) => {
   return (
     <section className={style.Home__CardsContainer}>
       {jobData?.jobData?.jdList?.map((job, index) => (
-        <JobCard key={index} job={job} />
+        <JobCard key={job.jdUid} job={job} />
       ))}
     </section>
   )

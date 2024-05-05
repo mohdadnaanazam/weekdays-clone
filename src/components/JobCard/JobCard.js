@@ -1,6 +1,11 @@
+import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter'
 import { Button } from '../Button';
 import style from './JobCard.module.css'
 
+/**
+ * @description Tag component
+ * @returns JSX.Element
+ */
 const Tag = () => {
   return (
     <div className={style.Tag}>
@@ -13,39 +18,69 @@ const Tag = () => {
   )
 }
 
-export const JobCard = () => {
+export const RenderMinExp = (props) => {
+  const { minExp } = props
+
+  if (!minExp) {
+    return (
+      <div style={{ flex: 1 }} />
+    )
+  }
+
+  return (
+    <>
+      <h2 className={style.JobCard__FooterMinExpText}>{minExp ? 'Minimum Experience' : ''}</h2>
+      <p className={style.JobCard__FooterExpCountText}>{minExp ? `${minExp} years` : ''}</p>
+    </>
+  )
+}
+
+export const JobCard = (props) => {
+  // init
+  const { job } = props
+
+  const { logoUrl, companyName, location, jobDetailsFromCompany, jobRole, maxJdSalary, minJdSalary, salaryCurrencyCode, minExp } = job
+
+  /**
+   * @description Renders estimated salary
+   * @returns {string}
+   */
+  const renderEstSalary = () => {
+    if (minJdSalary && maxJdSalary) {
+      return `${minJdSalary} - ${maxJdSalary}${salaryCurrencyCode}`
+    } else if (minJdSalary) {
+      return `${minJdSalary}${salaryCurrencyCode}`
+    } else if (maxJdSalary) {
+      return `${maxJdSalary}${salaryCurrencyCode}`
+    }
+  }
+
   return (
     <article className={style.JobCard}>
       <Tag />
       <header className={style.JobCard__Header}>
         <div className={style.JobCard__HeaderRow}>
           <div>
-            <img style={{ backgroundColor: 'red', height: 30, width: 30 }} src="https://www.famapp.in/assets/localImages/fampayLogo.png" alt="company-img" />
+            <img style={{ height: 30, width: 30 }} src={logoUrl} alt="company-img" />
           </div>
 
           <div className={style.JobCard__HeaderInfo}>
-            <h1 className={style.JobCard__HeaderInfoCompanyNameText}>fampay</h1>
-            <p className={style.JobCard__HeaderInfoRollTypeText}>Backend Engineer</p>
-            <p className={style.JobCard__HeaderInfoLocationText}>Banglore</p>
+            <h1 className={style.JobCard__HeaderInfoCompanyNameText}>{companyName}</h1>
+            <p className={style.JobCard__HeaderInfoRollTypeText}>{capitalizeFirstLetter(jobRole)}</p>
+            <p className={style.JobCard__HeaderInfoLocationText}>{capitalizeFirstLetter(location)}</p>
           </div>
         </div>
       </header>
 
       <section className={style.JobCard__SalaryInfo}>
-        <h2 className={style.JobCard__SalaryInfoEstSalaryText}>Estimated Salary: 18 - 35LPA</h2>
+        <h2 className={style.JobCard__SalaryInfoEstSalaryText}>Estimated Salary: {renderEstSalary()}</h2>
       </section>
 
       <section className={style.JobCard__CompanyInfo}>
         <h2 className={style.JobCard__CompanyInfoAboutCompanyText}>About Company</h2>
         <p className={style.JobCard__CompanyInfoAboutUsText}>About us</p>
         <p className={style.JobCard__CompanyInfoDescriptionText}>
-          Tempor exercitation culpa veniam minim nisi mollit commodo nulla id
-          laboris nostrud. Culpa proident ex enim culpa incididunt id ipsum
-          adipisicing dolore culpa magna incididunt duis. Laborum ea dolor
-          deserunt laborum. Consectetur eu cillum id duis ipsum cupidatat
-          veniam. Est labore consectetur adipisicing excepteur est. Esse culpa
-          aliquip officia ea labore adipisicing cupidatat occaecat excepteur
-          irure consequat sunt amet. Sunt nostrud eu mollit in tempor.
+          {jobDetailsFromCompany}
         </p>
       </section>
 
@@ -54,11 +89,11 @@ export const JobCard = () => {
       </div>
 
       <footer className={style.JobCard__Footer}>
-        <h2 className={style.JobCard__FooterMinExpText}>Minimum Experience</h2>
-        <p className={style.JobCard__FooterExpCountText}>2 years</p>
+        <RenderMinExp minExp={minExp} />
+
+        <Button />
       </footer>
 
-      <Button />
     </article>
-  );
-};
+  )
+}

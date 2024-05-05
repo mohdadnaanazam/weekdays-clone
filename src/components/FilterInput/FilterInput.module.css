@@ -32,3 +32,28 @@
     height: 14px;
   }
 }
+
+.FilterInput__TextField {
+  :global(.MuiInputBase-input) {
+    font-size: 13px;
+    font-family: 'Lexend';
+    font-weight: 400;
+    height: 24px;
+  }
+}
+
+:global(.MuiAutocomplete-popper .MuiAutocomplete-option) {
+  font-size: 14px;
+  padding-left: 16px;
+}
+
+:global(.MuiAutocomplete-popper .MuiAutocomplete-groupUl .MuiAutocomplete-option) {
+  padding-left: 16px;
+}
+
+:global(.MuiAutocomplete-popper .MuiAutocomplete-groupLabel) {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 40px;
+  color: gray;
+}

@@ -3,6 +3,10 @@
   border-radius: 20px;
   padding: 20px 20px;
   font-family: "Lexend", sans-serif;
+  max-height: 800px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .JobCard__HeaderRow {
@@ -73,6 +77,10 @@
 
 .JobCard__Footer {
   margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  /* height: 100%; */
 }
 
 .JobCard__FooterMinExpText {
@@ -88,7 +96,7 @@
   line-height: 1.5;
 }
 
-.Tag{
+.Tag {
   display: flex;
   width: 100%;
   padding: 5px 0px;

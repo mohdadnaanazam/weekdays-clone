@@ -1,4 +1,3 @@
-import React from 'react'
 import { Autocomplete, TextField } from '@mui/material'
 import style from './FilterInput.module.css';
 
@@ -20,7 +19,7 @@ export const FilterInput = () => {
           groupBy={(option) => option.groupBy}
           getOptionLabel={(option) => option.title}
           multiple
-          sx={{ minWidth: 250, borderColor: 'red' }}
+          sx={{ minWidth: 250 }}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -92,6 +91,13 @@ export const FilterInput = () => {
               sx={{ fontSize: '15px' }}
             />
           )}
+        />
+      </div>
+
+      <div className={style.FilterInput__TextField}>
+        <TextField
+          placeholder='Search Company Name'
+          size='small'
         />
       </div>
     </div>
