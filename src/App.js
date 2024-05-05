@@ -51,8 +51,6 @@ function App() {
   const nextPageLoading = jobData.nextPageLoading
   const initialLoading = jobData.loading
 
-  console.log(jobData, 'jobData')
-
   /**
    * @description Fetches jobs from the API
    * @returns {void}
