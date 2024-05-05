@@ -1,4 +1,6 @@
-.Home { }
+.Home {
+  height: 100vh;
+}
 
 .Home__CardsContainer {
   display: grid;
@@ -7,4 +9,12 @@
   align-items: stretch;
   padding-inline: 20px;
   padding-bottom: 20px;
+}
+
+.Home__CardsContainer--Loading {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
