@@ -45,7 +45,7 @@ export const jobDataSlice = createSlice({
     },
 
     filterJobs: (state, action) => {
-      const { roles, experience, pay } = state.filters
+      const { roles, experience, pay, jobType, companyName } = state.filters
 
       // initialize filteredJobs with all jobs
       let filteredJobs = state.jobData;
@@ -65,7 +65,24 @@ export const jobDataSlice = createSlice({
         filteredJobs = filteredJobs.filter(job => job.minJdSalary <= pay);
       }
 
-      state.jobWithFilters = filteredJobs;
+      // apply jobType filter
+      if (jobType?.length > 0) {
+        filteredJobs = filteredJobs.filter(job => {
+          if (jobType.includes('office')) {
+            return job.location !== 'remote' && job.location !== 'hybrid'
+          } else if (jobType.includes('remote')) {
+            return job.location === 'remote'
+          } else {
+            return job.location === 'hybrid'
+          }
+        })
+      }
+
+      if (companyName?.length > 0) {
+        filteredJobs = filteredJobs.filter(job => job.companyName.toLowerCase().includes(companyName))
+      }
+
+      state.jobWithFilters = filteredJobs
     },
   },
   extraReducers: (builder) => {
