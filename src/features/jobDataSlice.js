@@ -21,8 +21,6 @@ export const getJob = createAsyncThunk('getJob', async (offset = 10) => {
 
     return response.json()
   } catch (error) {
-    console.log(error, 'error')
-
     return error
   }
 })
