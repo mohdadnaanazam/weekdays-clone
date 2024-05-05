@@ -18,3 +18,14 @@
   align-items: center;
   height: 100%;
 }
+
+.Home__Footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.Home__Footer--Hidden {
+  display: none;
+}

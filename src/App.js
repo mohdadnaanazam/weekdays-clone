@@ -1,6 +1,8 @@
 import { getJob } from './features/jobDataSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import classNames from 'classnames'
 
 import './styles/globals.css'
 import { FilterInput } from './components/FilterInput'
@@ -12,7 +14,7 @@ import { Loader } from './components/Loader'
 const RenderJobs = (props) => {
   const { jobData, isLoading } = props
 
-  if(isLoading) {
+  if (isLoading) {
     return (
       <section className={style['Home__CardsContainer--Loading']}>
         <Loader />
@@ -22,7 +24,7 @@ const RenderJobs = (props) => {
 
   return (
     <section className={style.Home__CardsContainer}>
-      {jobData?.jobData?.jdList?.map((job, index) => (
+      {jobData?.jobData?.map((job, index) => (
         <JobCard key={job.jdUid} job={job} />
       ))}
     </section>
@@ -33,8 +35,10 @@ function App() {
   // init
   const dispatch = useDispatch()
   const jobData = useSelector(state => state.app)
-
-  console.log(jobData, 'jobData')
+  const offset = jobData.currentOffset
+  const totalCount = jobData.totalCount
+  const nextPageLoading = jobData.nextPageLoading
+  const initialLoading = jobData.loading
 
   /**
    * @description Fetches jobs from the API
@@ -47,13 +51,30 @@ function App() {
   // fetch jobs on component mount
   useEffect(() => {
     handleFetchJobs()
-  }, [dispatch])
+  }, [])
+
+
+  /**
+   * @description Fetches the next page of jobs
+   * @returns {void}
+   */
+  const handleFetchNextPage = () => {
+    if (!jobData.loading) {
+      dispatch(getJob(offset + 10))
+    }
+  }
 
   return (
     <div className={style.Home}>
       <FilterInput />
 
-      <RenderJobs jobData={jobData} isLoading={jobData.loading} />
+      <InfiniteScroll dataLength={jobData.jobData?.length} next={handleFetchNextPage} hasMore={jobData.jobData?.length <= totalCount}>
+        <RenderJobs jobData={jobData} isLoading={jobData.loading} />
+
+        <section className={classNames(nextPageLoading && !initialLoading  ? style.Home__Footer : style['Home__Footer--Hidden'])}>
+          <Loader />
+        </section>
+      </InfiniteScroll>
     </div>
   );
 }
